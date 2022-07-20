@@ -5,17 +5,7 @@ from .cart import Cart
 from .forms import CartAddProductForm
 
 
-def cart_detail(request):
-    cart = Cart(request)
-    
-    for item in cart:
-        item['update_quantity_form'] = CartAddProductForm(
-                                    initial = {'quantity': item['quantity'],
-                                               'override': True
-                                               })
-    
-    
-    return render(request, 'cart/detail.html', {'cart':cart})
+
 
 
 @require_POST
@@ -40,4 +30,14 @@ def cart_remove(request, product_id):
     # return render(request, 'shop/product/list.html', {})
     
 
-
+def cart_detail(request):
+    cart = Cart(request)
+    
+    for item in cart:
+        item['update_quantity_form'] = CartAddProductForm(
+                                    initial = {'quantity': item['quantity'],
+                                               'override': True
+                                               })
+    
+    
+    return render(request, 'cart/detail.html', {'cart':cart})
